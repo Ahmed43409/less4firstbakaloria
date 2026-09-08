@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الحصة 4 — حقوق الملكية الفكرية | البرمجة والذكاء الاصطناعي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#100B1E;--bg-2:#170F2B;--panel:#1C1333;--panel-2:#241A3F;
+    --violet:#8B5CF6;--violet-deep:#4C1D95;--gold:#E8C468;--gold-deep:#9A7A2E;
+    --emerald:#34D399;--emerald-deep:#0F6E56;--coral:#F0997B;--sky:#63B3ED;--sky-deep:#1E5A8A;
+    --ink:#F4F1FB;--ink-dim:#B6ADD1;--ink-faint:#7C7295;--line:rgba(139,92,246,0.22);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--ink);font-family:'Cairo',sans-serif;line-height:1.75;overflow-x:hidden;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px;}
+  .grain{position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(139,92,246,0.10), transparent 40%),
+      radial-gradient(circle at 88% 6%, rgba(232,196,104,0.08), transparent 35%),
+      radial-gradient(circle at 76% 82%, rgba(52,211,153,0.08), transparent 40%);
+  }
+  header{position:relative;z-index:1;padding:64px 0 56px;border-bottom:1px solid var(--line);background:linear-gradient(180deg, var(--bg-2), var(--bg));}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;color:var(--gold);border:1px solid var(--gold-deep);background:rgba(232,196,104,0.08);padding:6px 14px;border-radius:999px;margin-bottom:24px;}
+  .eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);}
+  h1{font-size:clamp(32px,5.6vw,50px);font-weight:900;line-height:1.2;background:linear-gradient(90deg, var(--ink) 40%, var(--violet) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:16px;}
+  .hero-sub{font-size:18px;color:var(--ink-dim);max-width:700px;margin-bottom:32px;font-weight:600;}
+  .hero-tags{display:flex;flex-wrap:wrap;gap:10px;}
+  .tag{font-size:13px;color:var(--ink-dim);border:1px solid var(--line);padding:7px 14px;border-radius:8px;background:rgba(255,255,255,0.02);}
+  .tag b{color:var(--ink);font-weight:700;}
+  section{position:relative;z-index:1;padding:56px 0;border-bottom:1px solid var(--line);}
+  .sec-num{font-family:'JetBrains Mono',monospace;color:var(--violet);font-size:13px;letter-spacing:0.08em;margin-bottom:8px;}
+  h2{font-size:clamp(23px,3.2vw,30px);font-weight:700;margin-bottom:14px;}
+  h3{font-size:18px;font-weight:700;margin-bottom:10px;color:var(--ink);}
+  .lead{color:var(--ink-dim);font-size:16px;max-width:740px;margin-bottom:28px;font-weight:400;}
+  p.body-text{color:var(--ink-dim);font-size:15.5px;max-width:740px;margin-bottom:14px;}
+  p.body-text b{color:var(--ink);}
+
+  .callout{margin-top:8px;padding:20px 22px;border-radius:14px;background:rgba(232,196,104,0.07);border:1px solid var(--gold-deep);font-size:15px;color:var(--ink-dim);}
+  .callout b{color:var(--gold);}
+  .callout .callout-title{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold);letter-spacing:0.05em;margin-bottom:8px;display:block;}
+  .callout.v{background:rgba(139,92,246,0.08);border-color:var(--violet-deep);}
+  .callout.v .callout-title{color:var(--violet);}
+  .callout.v b{color:var(--violet);}
+  .callout.e{background:rgba(52,211,153,0.07);border-color:var(--emerald-deep);}
+  .callout.e .callout-title{color:var(--emerald);}
+  .callout.e b{color:var(--emerald);}
+  .callout.s{background:rgba(99,179,237,0.08);border-color:var(--sky-deep);}
+  .callout.s .callout-title{color:var(--sky);}
+  .callout.s b{color:var(--sky);}
+
+  /* branch cards (2 branches of IP) */
+  .branch-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:24px 0;}
+  .branch-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 22px;}
+  .branch-card .b-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:14px;}
+  .branch-card.b1 .b-icon{background:rgba(99,179,237,0.15);}
+  .branch-card.b2 .b-icon{background:rgba(232,196,104,0.15);}
+  .branch-title{font-weight:700;font-size:17px;margin-bottom:2px;}
+  .branch-en{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);display:block;margin-bottom:10px;}
+  .branch-def{font-size:13.5px;color:var(--ink-dim);margin-bottom:12px;}
+  .branch-examples{font-size:12.5px;color:var(--ink-faint);border-top:1px solid var(--line);padding-top:10px;}
+  .branch-examples b{color:var(--ink-dim);}
+
+  /* comparison table */
+  .cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+  .cmp-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;}
+  .cmp-card .cmp-label{font-family:'JetBrains Mono',monospace;font-size:12px;display:inline-block;padding:4px 10px;border-radius:999px;margin-bottom:12px;}
+  .cmp-card.primary .cmp-label{background:rgba(52,211,153,0.12);color:var(--emerald);}
+  .cmp-card.secondary .cmp-label{background:rgba(99,179,237,0.12);color:var(--sky);}
+  .cmp-card .cmp-title{font-weight:700;font-size:17px;margin-bottom:10px;}
+  .cmp-card ul{padding-right:18px;color:var(--ink-dim);font-size:14px;}
+  .cmp-card ul li{margin-bottom:8px;}
+  .cmp-card ul li b{color:var(--ink);}
+
+  .part-quiz{margin-top:36px;padding-top:28px;border-top:1px dashed var(--line);}
+  .qc-label{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-faint);letter-spacing:0.06em;margin-bottom:16px;}
+  .qc-label::before{content:'✱';color:var(--gold);}
+  .task-group-title{display:flex;align-items:center;gap:12px;margin-bottom:16px;margin-top:8px;}
+  .task-group-title .badge{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;}
+  .badge.mcq{background:rgba(99,179,237,0.14);color:var(--sky);border:1px solid var(--sky-deep);}
+  .badge.essay{background:rgba(139,92,246,0.14);color:var(--violet);border:1px solid var(--violet-deep);}
+  .task-group-title h3{margin:0;font-size:16px;}
+  .q-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .q-card .q-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px;}
+  .q-num{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--violet);font-size:14px;flex:none;}
+  .q-level{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);border:1px solid var(--line);padding:3px 10px;border-radius:999px;white-space:nowrap;}
+  .q-text{font-size:15px;color:var(--ink);margin-bottom:12px;font-weight:600;line-height:1.7;}
+  .q-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .q-opt{font-size:13.5px;color:var(--ink-dim);background:rgba(255,255,255,0.03);border:1px solid var(--line);border-radius:9px;padding:10px 14px;}
+  .q-opt b{color:var(--ink-faint);margin-left:6px;}
+  .essay-line{border-bottom:1px dashed var(--line);height:26px;margin-top:14px;}
+
+  .summary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+  .sum-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;}
+  .sum-card .sum-num{font-family:'JetBrains Mono',monospace;color:var(--violet);font-size:12px;margin-bottom:6px;}
+  .sum-card .sum-title{font-weight:700;font-size:15px;margin-bottom:6px;}
+  .sum-card .sum-body{font-size:13px;color:var(--ink-dim);}
+
+  footer{padding:48px 0 64px;position:relative;z-index:1;text-align:center;}
+  footer .msg{font-size:19px;font-weight:700;color:var(--ink);max-width:620px;margin:0 auto 8px;}
+  footer .sub{color:var(--ink-faint);font-size:13.5px;}
+
+  @media(max-width:760px){
+    .branch-grid{grid-template-columns:1fr;}
+    .cmp-grid{grid-template-columns:1fr;}
+    .summary-grid{grid-template-columns:1fr;}
+    .q-options{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">الوحدة الثانية: دراسة المعلومات — الحصة 4</div>
+    <h1>حقوق الملكية الفكرية</h1>
+    <p class="hero-sub">أفكارك واختراعاتك وإبداعاتك... كلها "ملكية" ليك، حتى لو ملهاش شكل مادي تقدر تلمسه. الحصة دي هتفهمك إزاي القانون بيحمي عقلك، مش بس جيبك.</p>
+    <div class="hero-tags">
+      <div class="tag"><b>IP Rights</b> حقوق الملكية الفكرية</div>
+      <div class="tag"><b>Industrial</b> الملكية الصناعية</div>
+      <div class="tag"><b>Copyright</b> حقوق المؤلف</div>
+      <div class="tag"><b>Formality</b> مبدأ الشكلية</div>
+    </div>
+  </div>
+</header>
+
+<section id="def">
+  <div class="wrap">
+    <div class="sec-num">01 / لما "الفكرة" نفسها بتبقى ملكك</div>
+    <h2>مفهوم حقوق الملكية الفكرية</h2>
+    <p class="lead">إحنا اتعودنا إن "الملكية" بتاعة حاجة ملموسة — بيت، عربية، موبايل. لكن فيه نوع تاني من الملكية، مش أقل قيمة، وهو ملكية "الأفكار" نفسها.</p>
+
+    <div class="callout v">
+      <span class="callout-title">التعريف</span>
+      <b>حقوق الملكية الفكرية (Intellectual Property Rights):</b> هي حقوق تحمي نتاج الإبداع الفكري البشري في المجالات الأدبية والفنية والعلمية والتجارية.
+    </div>
+
+    <div class="callout" style="margin-top:20px;">
+      <span class="callout-title">مثال حياتي</span>
+      أي حاجة "اخترعتها بعقلك" — أغنية لحّنتها، اختراع صممته، شعار رسمته لمشروعك — كل ده نتاج إبداع فكري، وله حماية قانونية بالظبط زي ما بيتك المادي محمي بسور وباب مقفول. الفرق إن هنا "السور" ده قانوني مش خرساني.
+    </div>
+
+    <p class="body-text" style="margin-top:26px;">حقوق الملكية الفكرية بتتفرع لفرعين رئيسيين، وهما اللي هنقعّد أساسهم النهارده، ونرجع لكل واحد فيهم بالتفصيل بعد كده:</p>
+
+    <div class="branch-grid">
+      <div class="branch-card b1">
+        <div class="b-icon">⚙️</div>
+        <div class="branch-title">حقوق الملكية الصناعية</div>
+        <span class="branch-en">Industrial Property Rights</span>
+        <div class="branch-def">بتحمي الابتكارات المرتبطة بالنشاط الصناعي والتجاري.</div>
+        <div class="branch-examples"><b>أمثلة:</b> براءات الاختراع، العلامات التجارية، الرسوم والنماذج الصناعية</div>
+      </div>
+      <div class="branch-card b2">
+        <div class="b-icon">🖋️</div>
+        <div class="branch-title">حقوق المؤلف والحقوق المجاورة</div>
+        <span class="branch-en">Copyrights &amp; Neighboring Rights</span>
+        <div class="branch-def">بتحمي الأعمال الإبداعية في الفنون والآداب.</div>
+        <div class="branch-examples"><b>أمثلة:</b> الروايات، الأفلام، الموسيقى، برامج الكمبيوتر</div>
+      </div>
+    </div>
+
+    <div class="part-quiz">
+      <div class="qc-label">جرّب فهمك في الجزء ده</div>
+      <div class="task-group-title"><span class="badge essay">مقالي</span><h3>سؤال مقالي</h3></div>
+      <div class="q-card">
+        <div class="q-top"><span class="q-num">س 1</span><span class="q-level">فهم</span></div>
+        <div class="q-text">اشرح تعريف حقوق الملكية الفكرية بكلامك، واذكر الفرعين الرئيسيين اللي بتتفرع منهم.</div>
+        <div class="essay-line"></div><div class="essay-line"></div>
+      </div>
+      <div class="task-group-title" style="margin-top:24px;"><span class="badge mcq">اختيار من متعدد</span><h3>3 أسئلة</h3></div>
+      <div class="q-card">
+        <div class="q-top"><span class="q-num">س 2</span><span class="q-level">تذكر</span></div>
+        <div class="q-text">حقوق الملكية الفكرية هي حقوق تحمي:</div>
+        <div class="q-options">
+          <div class="q-opt"><b>أ)</b> الممتلكات المادية فقط زي البيوت والعربيات</div>
+          <div class="q-opt"><b>ب)</b> نتاج الإبداع الفكري البشري في المجالات الأدبية والفنية والعلمية والتجارية</div>
+          <div class="q-opt"><b>ج)</b> البيانات الشخصية فقط</div>
+          <div class="q-opt"><b>د)</b> حقوق الملكية الصناعية فقط من غير حقوق المؤلف</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-top"><span class="q-num">س 3</span><span class="q-level">فهم</span></div>
+        <div class="q-text">أي مما يلي يندرج تحت حقوق الملكية الفكرية؟</div>
+        <div class="q-options">
+          <div class="q-opt"><b>أ)</b> براءة اختراع لآلة جديدة ورواية أدبية منشورة</div>
+          <div class="q-opt"><b>ب)</b> عنوان منزلك ورقم هاتفك</div>
+          <div class="q-opt"><b>ج)</b> حالتك الصحية وتاريخك المرضي</div>
+          <div class="q-opt"><b>د)</b> رقم بطاقتك القومية فقط</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-top"><span class="q-num">س 4</span><span class="q-level">تطبيق</span></div>
+        <div class="q-text">طالب اخترع جهاز بسيط لتوفير الكهرباء في البيت، وكتب كمان قصيدة عن اختراعه. أي وصف صحيح لحماية العملين؟</div>
+        <div class="q-options">
+          <div class="q-opt"><b>أ)</b> الاثنان محميان بنفس الطريقة تمامًا</div>
+          <div class="q-opt"><b>ب)</b> الاختراع يندرج تحت الملكية الصناعية، والقصيدة تحت حقوق المؤلف، وكل نوع له قواعد مختلفة</div>
+          <div class="q-opt"><b>ج)</b> القصيدة فقط محمية قانونًا</div>
+          <div class="q-opt"><b>د)</b> الاختراع فقط محمي قانونًا</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="industrial">
+  <div class="wrap">
+    <div class="sec-num">02 / الفرع الأول — عالم الاختراعات والمصانع</div>
+    <h2>حقوق الملكية الصناعية</h2>
+    <p class="lead">خلونا ناخد أول فرع من فروع الملكية الفكرية، ونفهم إيه اللي بيميزه عن باقي الحقوق.</p>
+
+    <div class="callout s">
+      <span class="callout-title">التعريف</span>
+      <b>حقوق الملكية الصناعية (Industrial Property Rights):</b> هي الحقوق التي تحمي الابتكارات والإبداعات المتعلقة بالنشاط الصناعي والتجاري، وتشمل الاختراعات، والرسوم والنماذج الصناعية، والعلامات التجارية، والأسماء التجارية، والمؤشرات الجغرافية، وكذلك الحماية من المنافسة غير المشروعة.
+    </div>
+
+    <div class="callout v" style="margin-top:20px;">
+      <span class="callout-title">مبدأ الشكلية (Formality) — أهم قاعدة في النوع ده</span>
+      عشان الحقوق دي تتمتع بالحماية القانونية، لازم <b>تسجيل رسمي</b> لدى الجهة المختصة (زي مكتب براءات الاختراع المصري). من غير تسجيل، مفيش حماية قانونية، حتى لو إنت فعلًا صاحب الفكرة الأصلي.
+    </div>
+
+    <div class="callout" style="margin-top:20px;">
+      <span class="callout-title">مثال حياتي</span>
+      لو اخترعت آلة جديدة كليًا، اختراعك مش هيتحمي قانونيًا إلا لو سجلته رسميًا في مكتب البراءات — تمامًا زي عربيتك، اللي محتاجة تسجلها في المرور عشان تبقى بتاعتك رسميًا وتقدر تثبت ملكيتك ليها لو حصل نزاع.
+    </div>
+
+    <div class="callout e" style="margin-top:20px;">
+      <span class="callout-title">استنى الحصة الجاية...</span>
+      حقوق الملكية الصناعية نفسها بتتقسم لأربعة أنواع مختلفة (براءات الاختراع، نموذج المنفعة، التصميمات الصناعية، العلامات التجارية)، وكل نوع له مدة حماية مختلفة. هناخدهم بالتفصيل الكامل الحصة الجاية.
+    </div>
+
+    <div class="part-quiz">
+      <div class="qc-label">جرّب فهمك في الجزء ده</div>
+      <div class="task-group-title"><span class="badge essay">مقالي</span><h3>سؤال مقالي</h3></div>
+      <div class="q-card">
+        <div class="q-top"><span class="q-num">س 5</span><span class="q-level">تطبيق</span></div>
+        <div class="q-text">لو اخترعت جهاز جديد، إيه أول خطوة عملية لازم تعملها عشان اختراعك يتحمي قانونيًا؟ ووضح ليه الخطوة دي ضرورية.</div>
+        <div class="essay-line"></div><div class="essay-line"></div>
+      </div>
+      <div class="task-group-title" style="margin-top:24px;"><span class="badge mcq">اختيار من متعدد</span><h3>3 أسئلة</h3></div>
+      <div class="q-card">
+        <div class="q-top"><span class="q-num">س 6</span><span class="q-level">تذكر</span></div>
+        <div class="q-text">حقوق الملكية الصناعية هي الحقوق التي تحمي:</div>
+        <div class="q-options">
+          <div class="q-opt"><b>أ)</b> الأعمال الأدبية فقط</div>
+          <div class="q-opt"><b>ب)</b> الابتكارات والإبداعات المتعلقة بالنشاط الصناعي والتجاري</div>
+          <div class="q-opt"><b>ج)</b> البيانات الشخصية الحساسة</div>
+          <div class="q-opt"><b>د)</b> حقوق الخصوصية فقط</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-top"><span class="q-num">س 7</span><span class="q-level">فهم</span></div>
+        <div class="q-text">إيه معنى "مبدأ الشكلية" في حقوق الملكية الصناعية؟</div>
+        <div class="q-options">
+          <div class="q-opt"><b>أ)</b> الحقوق بتتحمي تلقائيًا من غير أي إجراء</div>
+          <div class="q-opt"><b>ب)</b> لازم تسجيل رسمي لدى جهة مختصة حتى تتمتع الحقوق بالحماية القانونية</div>
+          <div class="q-opt"><b>ج)</b> الحقوق بتنتهي بعد يوم واحد بس</div>
+          <div class="q-opt"><b>د)</b> مفيش أي شروط للحماية</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-top"><span class="q-num">س 8</span><span class="q-level">حل مشكلات</span></div>
+        <div class="q-text">شخص اخترع منتج جديد لكنه ماسجلوش رسميًا في مكتب البراءات، وبعد فترة حد تاني نسخ نفس الفكرة وسجلها باسمه. مين له الحق قانونيًا؟</div>
+        <div class="q-options">
+          <div class="q-opt"><b>أ)</b> المخترع الأصلي، لأنه صاحب الفكرة</div>
+          <div class="q-opt"><b>ب)</b> الشخص اللي سجل الاختراع رسميًا، لأن الملكية الصناعية تتطلب تسجيلًا (مبدأ الشكلية)</div>
+          <div class="q-opt"><b>ج)</b> الاتنين ليهم نفس الحق</div>
+          <div class="q-opt"><b>د)</b> محدش له أي حق قانوني</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="copyright">
+  <div class="wrap">
+    <div class="sec-num">03 / الفرع الثاني — عالم الفن والإبداع</div>
+    <h2>حقوق المؤلف</h2>
+    <p class="lead">الفرع التاني من الملكية الفكرية، ومبدأه القانوني معكوس تمامًا للفرع الأول.</p>
+
+    <div class="callout e">
+      <span class="callout-title">التعريف</span>
+      <b>حقوق المؤلف (Copyrights):</b> حقوق تتعلق بالأنشطة الإبداعية في الفنون، وتشمل أعمالًا مثل الروايات والأفلام واللوحات الفنية والصور الفوتوغرافية والموسيقى وبرامج الكمبيوتر، وهي محمية قانونًا بموجب قانون حماية الملكية الفكرية.
+    </div>
+
+    <div class="callout v" style="margin-top:20px;">
+      <span class="callout-title">مبدأ عدم التسجيل (Non-Formality) — عكس الفرع الأول تمامًا</span>
+      يتم إنشاء الحقوق في <b>لحظة إنشاء</b> العمل المحمي بحقوق المؤلف، بغض النظر عما إذا كان المؤلف هاويًا أو قاصرًا. يعني <b>من غير تسجيل، ومن غير أي إجراء رسمي.</b>
+    </div>
+
+    <div class="callout" style="margin-top:20px;">
+      <span class="callout-title">مثال حياتي</span>
+      لو كتبت دلوقتي قصة قصيرة في دفترك، حقوق المؤلف بتاعتك عليها بدأت من نفس اللحظة اللي خلصت فيها كتابتها — من غير ما تحتاج تسجلها في أي جهة رسمية. ده عكس تمامًا اختراع محتاج تسجيل رسمي في مكتب البراءات قبل ما يتحمي.
+    </div>
+
+    <div class="part-quiz">
+      <div class="qc-label">جرّب فهمك في الجزء ده</div>
+      <div class="task-group-title"><span class="badge essay">مقالي</span><h3>سؤال مقالي</h3></div>
+      <div class="q-card">
+        <div class="q-top"><span class="q-num">س 9</span><span class="q-level">فهم</span></div>
+        <div class="q-text">وضح إمتى بالظبط بتبدأ حماية "حقوق المؤلف" لعمل إبداعي، ووضح إزاي ده مختلف عن حقوق الملكية الصناعية.</div>
+        <div class="essay-line"></div><div class="essay-line"></div>
+      </div>
+      <div class="task-group-title" style="margin-top:24px;"><span class="badge mcq">اختيار من متعدد</span><h3>3 أسئلة</h3></div>
+      <div class="q-card">
+        <div class="q-top"><span class="q-num">س 10</span><span class="q-level">تذكر</span></div>
+        <div class="q-text">حقوق المؤلف تشمل أعمالًا مثل:</div>
+        <div class="q-options">
+          <div class="q-opt"><b>أ)</b> الاختراعات التقنية فقط</div>
+          <div class="q-opt"><b>ب)</b> الروايات، الأفلام، اللوحات الفنية، الصور، الموسيقى، وبرامج الكمبيوتر</div>
+          <div class="q-opt"><b>ج)</b> العلامات التجارية فقط</div>
+          <div class="q-opt"><b>د)</b> التصميمات الصناعية للسيارات فقط</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-top"><span class="q-num">س 11</span><span class="q-level">فهم</span></div>
+        <div class="q-text">طفل صغير كتب قصة قصيرة في كراسته المدرسية. هل هو صاحب حقوق مؤلف على القصة دي؟</div>
+        <div class="q-options">
+          <div class="q-opt"><b>أ)</b> لا، لأنه قاصر ومش عنده حق قانوني</div>
+          <div class="q-opt"><b>ب)</b> نعم، لأن حقوق المؤلف بتُنشأ وقت الإبداع بغض النظر عن كون المؤلف هاويًا أو قاصرًا</div>
+          <div class="q-opt"><b>ج)</b> لا، لازم يسجل القصة في جهة رسمية الأول</div>
+          <div class="q-opt"><b>د)</b> نعم بس بعد سن الـ18 بس</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-top"><span class="q-num">س 12</span><span class="q-level">حل مشكلات</span></div>
+        <div class="q-text">طالب سمع صديقه بيقول: "أنا محتاج أسجل الأغنية اللي كتبتها في جهة رسمية عشان تتحمي، زي ما بنعمل مع الاختراعات". هل الكلام ده صح؟</div>
+        <div class="q-options">
+          <div class="q-opt"><b>أ)</b> صح تمامًا، نفس القواعد للاتنين</div>
+          <div class="q-opt"><b>ب)</b> غلط، لأن حقوق المؤلف بتتحمي تلقائيًا وقت الإبداع من غير حاجة لتسجيل رسمي</div>
+          <div class="q-opt"><b>ج)</b> صح، لكن التسجيل اختياري بس مستحسن</div>
+          <div class="q-opt"><b>د)</b> غلط، لأن الأغاني أصلًا مش محمية بأي قانون</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="sec-num">04 / خلّينا نحط الاتنين جنب بعض</div>
+    <h2>الفرق بين النوعين</h2>
+    <p class="lead">دلوقتي بعد ما عرفنا الفرعين، خلونا نثبّت الفرق الجوهري بينهم في صورة واحدة واضحة.</p>
+
+    <div class="cmp-grid">
+      <div class="cmp-card primary">
+        <span class="cmp-label">صناعي وتجاري</span>
+        <div class="cmp-title">حقوق الملكية الصناعية</div>
+        <ul>
+          <li><b>المجال:</b> صناعي وتجاري</li>
+          <li><b>الشرط:</b> تسجيل رسمي إلزامي (مبدأ الشكلية)</li>
+          <li><b>الأمثلة:</b> اختراعات، علامات تجارية، تصميمات</li>
+        </ul>
+      </div>
+      <div class="cmp-card secondary">
+        <span class="cmp-label">أدبي وفني</span>
+        <div class="cmp-title">حقوق المؤلف</div>
+        <ul>
+          <li><b>المجال:</b> أدبي وفني</li>
+          <li><b>الشرط:</b> بلا تسجيل، حماية فورية (مبدأ عدم التسجيل)</li>
+          <li><b>الأمثلة:</b> روايات، أفلام، موسيقى، برامج كمبيوتر</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="callout-title">مثال حياتي يربط الاتنين</span>
+      لو صممت لوجو لمشروعك، محتاج تسجله رسميًا كعلامة تجارية عشان يتحمي قانونيًا (ملكية صناعية). لكن لو كتبت أغنية عن مشروعك ده، حقوقك عليها بتبدأ فورًا من لحظة كتابتها، من غير أي تسجيل (حقوق مؤلف). نفس الشخص، نفس اليوم، لكن نوعين مختلفين تمامًا من الحماية القانونية.
+    </div>
+
+    <div class="part-quiz">
+      <div class="qc-label">جرّب فهمك في الجزء ده</div>
+      <div class="task-group-title"><span class="badge essay">مقالي</span><h3>سؤال مقالي</h3></div>
+      <div class="q-card">
+        <div class="q-top"><span class="q-num">س 13</span><span class="q-level">حل مشكلات</span></div>
+        <div class="q-text">صديقك مبيّن إنه لخبط بين "حقوق الملكية الصناعية" و"حقوق المؤلف". اكتب فقرة قصيرة توضحله فيها أهم فرقين بينهم، بمثال لكل نوع.</div>
+        <div class="essay-line"></div><div class="essay-line"></div>
+      </div>
+      <div class="task-group-title" style="margin-top:24px;"><span class="badge mcq">اختيار من متعدد</span><h3>3 أسئلة</h3></div>
+      <div class="q-card">
+        <div class="q-top"><span class="q-num">س 14</span><span class="q-level">فهم</span></div>
+        <div class="q-text">أي مما يلي يمثل الفرق الجوهري بين حقوق الملكية الصناعية وحقوق المؤلف؟</div>
+        <div class="q-options">
+          <div class="q-opt"><b>أ)</b> لا يوجد فرق بينهما إطلاقًا</div>
+          <div class="q-opt"><b>ب)</b> الملكية الصناعية تتطلب تسجيلًا رسميًا (الشكلية)، بينما حقوق المؤلف تُنشأ تلقائيًا وقت الإبداع (عدم التسجيل)</div>
+          <div class="q-opt"><b>ج)</b> حقوق المؤلف فقط هي المحمية قانونيًا</div>
+          <div class="q-opt"><b>د)</b> الملكية الصناعية فقط هي المحمية قانونيًا</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-top"><span class="q-num">س 15</span><span class="q-level">تطبيق</span></div>
+        <div class="q-text">مصمم جرافيك عمل شعار (لوجو) جديد لشركة، وكتب كمان مقال عن قصة تصميم اللوجو ده. أي وصف صحيح؟</div>
+        <div class="q-options">
+          <div class="q-opt"><b>أ)</b> الشعار محتاج تسجيل رسمي كعلامة تجارية، والمقال محمي تلقائيًا بحقوق المؤلف من لحظة كتابته</div>
+          <div class="q-opt"><b>ب)</b> الاثنان محتاجين تسجيل رسمي</div>
+          <div class="q-opt"><b>ج)</b> الاثنان محميان تلقائيًا من غير تسجيل</div>
+          <div class="q-opt"><b>د)</b> لا حماية قانونية لأي منهما</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-top"><span class="q-num">س 16</span><span class="q-level">حل مشكلات</span></div>
+        <div class="q-text">شركة سجلت علامتها التجارية رسميًا، وفي نفس الوقت نشرت كتيّب تعريفي (بروشور) عن منتجاتها. هل الكتيّب محتاج نفس إجراءات تسجيل العلامة التجارية عشان يتحمي؟</div>
+        <div class="q-options">
+          <div class="q-opt"><b>أ)</b> نعم، لازم يتسجل بنفس الطريقة</div>
+          <div class="q-opt"><b>ب)</b> لا، لأن الكتيّب عمل إبداعي مكتوب ويندرج تحت حقوق المؤلف اللي بتتحمي تلقائيًا وقت الإنشاء</div>
+          <div class="q-opt"><b>ج)</b> لا يوجد أي حماية قانونية للكتيّب</div>
+          <div class="q-opt"><b>د)</b> يحتاج فقط موافقة شفهية من الشركة</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="summary">
+  <div class="wrap">
+    <div class="sec-num">05 / خلاصة الحصة</div>
+    <h2>كل حاجة في نظرة واحدة</h2>
+    <div class="summary-grid">
+      <div class="sum-card">
+        <div class="sum-num">01</div>
+        <div class="sum-title">حقوق الملكية الفكرية</div>
+        <div class="sum-body">تحمي نتاج الإبداع الفكري، وتتفرع لملكية صناعية وحقوق مؤلف.</div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-num">02</div>
+        <div class="sum-title">الملكية الصناعية</div>
+        <div class="sum-body">اختراعات وعلامات تجارية — تحتاج تسجيل رسمي (مبدأ الشكلية).</div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-num">03</div>
+        <div class="sum-title">حقوق المؤلف</div>
+        <div class="sum-body">روايات وموسيقى وبرامج — حماية فورية من غير تسجيل (مبدأ عدم التسجيل).</div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-num">04</div>
+        <div class="sum-title">الفرق الجوهري</div>
+        <div class="sum-body">صناعي/تجاري + تسجيل إلزامي، مقابل أدبي/فني + حماية فورية.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="msg">فكرة في دماغك، اختراع صممته، أو حتى قصيدة كتبتها — كل ده "ملكك" قانونًا، بس السؤال دايمًا: أي نوع حماية بيحتاجه؟</p>
+    <p class="sub mono">الحصة 4 — حقوق الملكية الفكرية | البرمجة والذكاء الاصطناعي، أولى ثانوي — الحصة الجاية: حقوق الملكية الصناعية بالتفصيل</p>
+  </div>
+</footer>
+
+</body>
+</html>
